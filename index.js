@@ -8,6 +8,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({ origin: 'https://main--shimmering-blini-49e6fb.netlify.app' }));
 
+// Middleware untuk mengatur CORS (Cross-Origin Resource Sharing)
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://main--shimmering-blini-49e6fb.netlify.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 app.post('/api/encode', (req, res) => {
   console.log("1");
   const input = req.body.input;
