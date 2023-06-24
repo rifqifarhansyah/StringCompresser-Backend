@@ -9,21 +9,30 @@ app.use(bodyParser.json());
 app.use(cors({ origin: 'https://main--shimmering-blini-49e6fb.netlify.app' }));
 
 app.post('/api/encode', (req, res) => {
+  console.log("1");
   const input = req.body.input;
+  console.log("2");
   const outputChoice = req.body.outputChoice;
+  console.log("3");
   const encodedOutput = encode(input, outputChoice);
+  console.log("4");
 
   const encodeResult = {
     input: input,
     outputChoice: outputChoice,
     encodedOutput: encodedOutput
   };
+  console.log("5");
 
-  // const data = JSON.parse(fs.readFileSync("encodeResultsFile.json"));
+  const data = JSON.parse(fs.readFileSync("encodeResultsFile.json"));
+  console.log("6");
   data.encodeResults.push(encodeResult);
+  console.log("7");
   fs.writeFileSync("encodeResultsFile.json", JSON.stringify(data));
+  console.log("8");
 
   res.json({ encodedOutput });
+  console.log("9");
 });
 
 app.post('/api/decode', (req, res) => {
