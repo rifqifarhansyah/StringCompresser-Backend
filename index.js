@@ -19,7 +19,7 @@ app.post('/api/encode', (req, res) => {
     encodedOutput: encodedOutput
   };
 
-  const data = JSON.parse(fs.readFileSync("encodeResultsFile.json"));
+  // const data = JSON.parse(fs.readFileSync("encodeResultsFile.json"));
   data.encodeResults.push(encodeResult);
   fs.writeFileSync("encodeResultsFile.json", JSON.stringify(data));
 
