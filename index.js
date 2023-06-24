@@ -4,17 +4,15 @@ import cors from 'cors';
 import fs from 'fs';
 
 const app = express();
+console.log("-1");
 app.use(bodyParser.urlencoded({ extended: true }));
+console.log("-2");
 app.use(bodyParser.json());
+console.log("-3");
 app.use(cors({ origin: 'https://main--shimmering-blini-49e6fb.netlify.app' }));
+console.log("-4");
 
 // Middleware untuk mengatur CORS (Cross-Origin Resource Sharing)
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://main--shimmering-blini-49e6fb.netlify.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
 
 app.post('/api/encode', (req, res) => {
   console.log("1");
