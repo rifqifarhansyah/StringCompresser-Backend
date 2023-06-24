@@ -26,7 +26,7 @@ app.post('/api/encode', (req, res) => {
     data.encodeResults.push(encodeResult);
 
     // Menyimpan data JSON ke file
-    fs.writeFileSync('encodeResults.json', JSON.stringify(data));
+    fs.writeFileSync('encodeResults.json', CommentsAPI.create(data));
 
     res.json({ encodedOutput });
   });
@@ -49,7 +49,7 @@ app.post('/api/decode', (req, res) => {
     data.decodeResults.push(decodeResult);
 
     // Menyimpan data JSON ke file
-    fs.writeFileSync('decodeResults.json', JSON.stringify(data));
+    fs.writeFileSync('decodeResults.json', CommentsAPI.create(data));
 
     res.json({ decodedOutput });
   });
@@ -72,7 +72,7 @@ app.post('/api/decode', (req, res) => {
     data.encodeResults.push(encodeResult);
 
     // Menyimpan data JSON ke file
-    fs.writeFileSync('encodeResults.json', JSON.stringify(data));
+    fs.writeFileSync('encodeResults.json', CommentsAPI.create(data));
 
     res.json({ encodedOutput });
   });
@@ -95,7 +95,7 @@ app.post('/api/huffmanDecode', (req, res) => {
     data.decodeResults.push(decodeResult);
 
     // Menyimpan data JSON ke file
-    fs.writeFileSync('decodeResults.json', JSON.stringify(data));
+    fs.writeFileSync('decodeResults.json', CommentsAPI.create(data));
 
     res.json({ decodedOutput });
   });
