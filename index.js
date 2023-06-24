@@ -8,6 +8,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
+// Membaca file JSON saat server dimulai atau membuat file jika belum ada
+const initializeDataFile = (fileName) => {
+  if (!fs.existsSync(fileName)) {
+    const initialData = {
+      encodeResults: [],
+      decodeResults: []
+    };
+    fs.writeFileSync(fileName, JSON.stringify(initialData));
+  }
+};
+
+const encodeResultsFile = 'encodeResults.json';
+const decodeResultsFile = 'decodeResults.json';
+
+initializeDataFile(encodeResultsFile);
+initializeDataFile(decodeResultsFile);
+
 app.post('/api/encode', (req, res) => {
   const input = req.body.input;
   const outputChoice = req.body.outputChoice;
