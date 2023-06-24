@@ -19,9 +19,9 @@ app.post('/api/encode', (req, res) => {
     encodedOutput: encodedOutput
   };
 
-  const data = JSON.parse(fs.readFileSync(encodeResultsFile));
+  const data = JSON.parse(fs.readFileSync("encodeResultsFile.json"));
   data.encodeResults.push(encodeResult);
-  fs.writeFileSync(encodeResultsFile, JSON.stringify(data));
+  fs.writeFileSync("encodeResultsFile.json", JSON.stringify(data));
 
   res.json({ encodedOutput });
 });
@@ -37,9 +37,9 @@ app.post('/api/decode', (req, res) => {
     decodedOutput: decodedOutput
   };
 
-  const data = JSON.parse(fs.readFileSync(decodeResultsFile));
+  const data = JSON.parse(fs.readFileSync("decodeResultsFile.json"));
   data.decodeResults.push(decodeResult);
-  fs.writeFileSync(decodeResultsFile, JSON.stringify(data));
+  fs.writeFileSync("decodeResultsFile.json", JSON.stringify(data));
 
   res.json({ decodedOutput });
 });
@@ -55,9 +55,9 @@ app.post('/api/huffmanEncode', (req, res) => {
     encodedOutput: encodedOutput
   };
 
-  const data = JSON.parse(fs.readFileSync(encodeResultsFile));
+  const data = JSON.parse(fs.readFileSync("encodeResultsFile.json"));
   data.encodeResults.push(encodeResult);
-  fs.writeFileSync(encodeResultsFile, JSON.stringify(data));
+  fs.writeFileSync("encodeResultsFile.json", JSON.stringify(data));
 
   res.json({ encodedOutput });
 });
@@ -71,9 +71,9 @@ app.post('/api/huffmanDecode', (req, res) => {
     decodedOutput: decodedOutput
   };
 
-  const data = JSON.parse(fs.readFileSync(decodeResultsFile));
+  const data = JSON.parse(fs.readFileSync("decodeResultsFile.json"));
   data.decodeResults.push(decodeResult);
-  fs.writeFileSync(decodeResultsFile, JSON.stringify(data));
+  fs.writeFileSync("decodeResultsFile.json", JSON.stringify(data));
 
   res.json({ decodedOutput });
 });
