@@ -6,7 +6,7 @@ import fs from 'fs';
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({ origin: 'https://main--shimmering-blini-49e6fb.netlify.app' }));
 
 // Membaca file JSON saat server dimulai atau membuat file jika belum ada
 const initializeDataFile = (fileName) => {
