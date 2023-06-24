@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({ origin: 'https://main--shimmering-blini-49e6fb.netlify.app' }));
 
-app.post('/api/encode', (req, res) => {
+app.post('/api/encode', async (req, res) => {
   const input = req.body.input;
   const outputChoice = req.body.outputChoice;
   const encodedOutput = encode(input, outputChoice);
@@ -26,7 +26,7 @@ app.post('/api/encode', (req, res) => {
   res.json({ encodedOutput });
 });
 
-app.post('/api/decode', (req, res) => {
+app.post('/api/decode', async (req, res) => {
   const input = req.body.input;
   const inputChoice = req.body.inputChoice;
   const decodedOutput = decode(input, inputChoice);
@@ -44,7 +44,7 @@ app.post('/api/decode', (req, res) => {
   res.json({ decodedOutput });
 });
 
-app.post('/api/huffmanEncode', (req, res) => {
+app.post('/api/huffmanEncode', async (req, res) => {
   const input = req.body.input;
   const outputChoice = req.body.outputChoice;
   const encodedOutput = huffmanEncode(input, outputChoice);
@@ -62,7 +62,7 @@ app.post('/api/huffmanEncode', (req, res) => {
   res.json({ encodedOutput });
 });
 
-app.post('/api/huffmanDecode', (req, res) => {
+app.post('/api/huffmanDecode', async (req, res) => {
   const input = req.body.input;
   const decodedOutput = huffmanDecode(input);
 
