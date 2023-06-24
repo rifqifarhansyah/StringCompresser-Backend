@@ -7,98 +7,78 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+
 app.post('/api/encode', (req, res) => {
-    const input = req.body.input;
-    const outputChoice = req.body.outputChoice; // Menambahkan penanganan outputChoice
-    const encodedOutput = encode(input, outputChoice); // Menyertakan outputChoice dalam pemanggilan fungsi encode
+  const input = req.body.input;
+  const outputChoice = req.body.outputChoice;
+  const encodedOutput = encode(input, outputChoice);
 
-    // Membuat objek untuk menyimpan hasil encode
-    const encodeResult = {
-        input: input,
-        outputChoice: outputChoice,
-        encodedOutput: encodedOutput
-    };
+  const encodeResult = {
+    input: input,
+    outputChoice: outputChoice,
+    encodedOutput: encodedOutput
+  };
 
-    // Mendapatkan data JSON dari file
-    const data = JSON.parse(fs.readFileSync('encodeResults.json'));
+  const data = JSON.parse(fs.readFileSync('encodeResults.json'));
+  data.encodeResults.push(encodeResult);
+  fs.writeFileSync('encodeResults.json', JSON.stringify(data));
 
-    // Menambahkan hasil encode ke array encodeResults
-    data.encodeResults.push(encodeResult);
+  res.json({ encodedOutput });
+});
 
-    // Menyimpan data JSON ke file
-    fs.writeFileSync('encodeResults.json', CommentsAPI.create(data));
-
-    res.json({ encodedOutput });
-  });
 app.post('/api/decode', (req, res) => {
-    const input = req.body.input;
-    const inputChoice = req.body.inputChoice; // Menambahkan penanganan inputChoice
-    const decodedOutput = decode(input, inputChoice); // Menyertakan inputChoice dalam pemanggilan fungsi decode
+  const input = req.body.input;
+  const inputChoice = req.body.inputChoice;
+  const decodedOutput = decode(input, inputChoice);
 
-    // Membuat objek untuk menyimpan hasil decode
-    const decodeResult = {
-        input: input,
-        inputChoice: inputChoice,
-        decodedOutput: decodedOutput
-    };
+  const decodeResult = {
+    input: input,
+    inputChoice: inputChoice,
+    decodedOutput: decodedOutput
+  };
 
-    // Mendapatkan data JSON dari file
-    const data = JSON.parse(fs.readFileSync('decodeResults.json'));
+  const data = JSON.parse(fs.readFileSync('decodeResults.json'));
+  data.decodeResults.push(decodeResult);
+  fs.writeFileSync('decodeResults.json', JSON.stringify(data));
 
-    // Menambahkan hasil decode ke array decodeResults
-    data.decodeResults.push(decodeResult);
+  res.json({ decodedOutput });
+});
 
-    // Menyimpan data JSON ke file
-    fs.writeFileSync('decodeResults.json', CommentsAPI.create(data));
+app.post('/api/huffmanEncode', (req, res) => {
+  const input = req.body.input;
+  const outputChoice = req.body.outputChoice;
+  const encodedOutput = huffmanEncode(input, outputChoice);
 
-    res.json({ decodedOutput });
-  });
-  app.post('/api/huffmanEncode', (req, res) => {
-    const input = req.body.input;
-    const outputChoice = req.body.outputChoice; // Menambahkan penanganan outputChoice
-    const encodedOutput = huffmanEncode(input, outputChoice); // Menyertakan outputChoice dalam pemanggilan fungsi encode
+  const encodeResult = {
+    input: input,
+    outputChoice: outputChoice,
+    encodedOutput: encodedOutput
+  };
 
-    // Membuat objek untuk menyimpan hasil encode
-    const encodeResult = {
-        input: input,
-        outputChoice: outputChoice,
-        encodedOutput: encodedOutput
-    };
+  const data = JSON.parse(fs.readFileSync('encodeResults.json'));
+  data.encodeResults.push(encodeResult);
+  fs.writeFileSync('encodeResults.json', JSON.stringify(data));
 
-    // Mendapatkan data JSON dari file
-    const data = JSON.parse(fs.readFileSync('encodeResults.json'));
+  res.json({ encodedOutput });
+});
 
-    // Menambahkan hasil encode ke array encodeResults
-    data.encodeResults.push(encodeResult);
-
-    // Menyimpan data JSON ke file
-    fs.writeFileSync('encodeResults.json', CommentsAPI.create(data));
-
-    res.json({ encodedOutput });
-  });
 app.post('/api/huffmanDecode', (req, res) => {
-    const input = req.body.input;
-    const inputChoice = req.body.inputChoice; // Menambahkan penanganan inputChoice
-    const decodedOutput = huffmanDecode(input); // Menyertakan inputChoice dalam pemanggilan fungsi decode
+  const input = req.body.input;
+  const inputChoice = req.body.inputChoice;
+  const decodedOutput = huffmanDecode(input);
 
-    // Membuat objek untuk menyimpan hasil decode
-    const decodeResult = {
-        input: input,
-        inputChoice: inputChoice,
-        decodedOutput: decodedOutput
-    };
+  const decodeResult = {
+    input: input,
+    inputChoice: inputChoice,
+    decodedOutput: decodedOutput
+  };
 
-    // Mendapatkan data JSON dari file
-    const data = JSON.parse(fs.readFileSync('decodeResults.json'));
+  const data = JSON.parse(fs.readFileSync('decodeResults.json'));
+  data.decodeResults.push(decodeResult);
+  fs.writeFileSync('decodeResults.json', JSON.stringify(data));
 
-    // Menambahkan hasil decode ke array decodeResults
-    data.decodeResults.push(decodeResult);
-
-    // Menyimpan data JSON ke file
-    fs.writeFileSync('decodeResults.json', CommentsAPI.create(data));
-
-    res.json({ decodedOutput });
-  });
+  res.json({ decodedOutput });
+});
 
 // Fungsi untuk melakukan LZW Encoding
 const encode = (inputEncoder, outputChoice) => {
