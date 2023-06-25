@@ -140,7 +140,7 @@ Sebuah aplikasi berbasis website sederhana yang dapat digunakan untuk melakukan 
 ## Video Capture
 <nl>
 
-![CompresserString Gif](https://github.com/rifqifarhansyah/CompresserString-WebApp/blob/main/img/textCompresser.gif?raw=true)
+![CompresserString Gif](https://github.com/rifqifarhansyah/StringCompresser-Backend/blob/main/img/textCompresser.gif?raw=true)
 
 <a name="screenshots"></a>
 
