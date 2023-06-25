@@ -4,41 +4,28 @@ import cors from 'cors';
 import fs from 'fs';
 
 const app = express();
-console.log("-1");
 app.use(bodyParser.urlencoded({ extended: true }));
-console.log("-2");
 app.use(bodyParser.json());
-console.log("-3");
-app.use(cors({ origin: 'https://main--shimmering-blini-49e6fb.netlify.app' }));
-console.log("-4");
+app.use(cors());
 
 // Middleware untuk mengatur CORS (Cross-Origin Resource Sharing)
 
 app.post('/api/encode', (req, res) => {
-  console.log("1");
   const input = req.body.input;
-  console.log("2");
   const outputChoice = req.body.outputChoice;
-  console.log("3");
   const encodedOutput = encode(input, outputChoice);
-  console.log("4");
 
   const encodeResult = {
     input: input,
     outputChoice: outputChoice,
     encodedOutput: encodedOutput
   };
-  console.log("5");
 
-  const data = JSON.parse(fs.readFileSync("encodeResultsFile.json"));
-  console.log("6");
+  const data = JSON.parse(fs.readFileSync("encodeResults.json"));
   data.encodeResults.push(encodeResult);
-  console.log("7");
-  fs.writeFileSync("encodeResultsFile.json", JSON.stringify(data));
-  console.log("8");
+  fs.writeFileSync("encodeResults.json", JSON.stringify(data));
 
   res.json({ encodedOutput });
-  console.log("9");
 });
 
 app.post('/api/decode', (req, res) => {
@@ -52,9 +39,9 @@ app.post('/api/decode', (req, res) => {
     decodedOutput: decodedOutput
   };
 
-  const data = JSON.parse(fs.readFileSync("decodeResultsFile.json"));
+  const data = JSON.parse(fs.readFileSync("decodeResults.json"));
   data.decodeResults.push(decodeResult);
-  fs.writeFileSync("decodeResultsFile.json", JSON.stringify(data));
+  fs.writeFileSync("decodeResults.json", JSON.stringify(data));
 
   res.json({ decodedOutput });
 });
@@ -70,9 +57,9 @@ app.post('/api/huffmanEncode', (req, res) => {
     encodedOutput: encodedOutput
   };
 
-  const data = JSON.parse(fs.readFileSync("encodeResultsFile.json"));
+  const data = JSON.parse(fs.readFileSync("encodeResults.json"));
   data.encodeResults.push(encodeResult);
-  fs.writeFileSync("encodeResultsFile.json", JSON.stringify(data));
+  fs.writeFileSync("encodeResults.json", JSON.stringify(data));
 
   res.json({ encodedOutput });
 });
@@ -86,9 +73,9 @@ app.post('/api/huffmanDecode', (req, res) => {
     decodedOutput: decodedOutput
   };
 
-  const data = JSON.parse(fs.readFileSync("decodeResultsFile.json"));
+  const data = JSON.parse(fs.readFileSync("decodeResults.json"));
   data.decodeResults.push(decodeResult);
-  fs.writeFileSync("decodeResultsFile.json", JSON.stringify(data));
+  fs.writeFileSync("decodeResults.json", JSON.stringify(data));
 
   res.json({ decodedOutput });
 });
